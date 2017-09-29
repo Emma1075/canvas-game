@@ -9,8 +9,8 @@ let myCanvas = document.getElementById('cv'),
 	oContext = myCanvas.getContext('2d');
 
 window.onresize = function() {
-	let w = document.documentElement.clientWidth;
-	let h = document.documentElement.clientHeight - 40;
+	let w = document.documentElement.clientWidth - 30;
+	let h = document.documentElement.clientHeight - 68;
 
 	myCanvas.width = w;
 	myCanvas.height = h;
