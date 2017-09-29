@@ -79,7 +79,6 @@ function initGame() {
 
 		// 重新绘制
 		draw();
-		getCore();
 	}, 16)
 }
 
@@ -88,8 +87,6 @@ myCanvas.addEventListener('touchstart', function(ev) {
 	let x = ev.targetTouches[0].clientX;
 	let y = ev.targetTouches[0].clientY - t;
 
-	console.log(x, ev.targetTouches[0].clientY)
-	console.log(x, y)
 	let r = Math.floor(y / block_h);
 	let c = Math.floor(x / block_w);
 
@@ -133,7 +130,6 @@ continueBtn.onclick = function() {
 	if (!isContinue) return;
 
 	maskStopped.style.display = 'none';
-	console.log('speed', speed);
 	timer = setInterval(function() {
 		t += speed;
 
@@ -152,7 +148,6 @@ continueBtn.onclick = function() {
 
 		// 重新绘制
 		draw();
-		getCore();
 	}, 16)
 
 	// 继续游戏后，isStarted 为 true
@@ -206,12 +201,14 @@ function draw() {
 }
 
 function getCore() {
-	let num = Math.floor((speed - 1) * 5 * speed * speed);
-	maskOver.innerHTML = `游戏结束！得分: ${num} `
+	let num = Math.floor((speed - 1.2) * 5 * speed * speed);
+	return num;
 }
 
 function stopGame() {
 	maskOver.style.display = 'block';
+	let num = getCore();
+	maskOver.innerHTML = `游戏结束! 得分: ${num}`
 	clearTimeout(timer);
 
 	// 游戏结束后，要重置初始值 t, speed, isStarted 与 isContinue;
@@ -219,7 +216,6 @@ function stopGame() {
 	speed = 1;
 	isStarted = false;
 	isContinue = false;
-	console.log('game over!')
 }
 
 function startGame() {

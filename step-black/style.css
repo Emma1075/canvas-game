@@ -35,6 +35,7 @@ body {
 .w80 {
 	width: 80px;
 	height: 40px;
+	/*margin-top: 10px;*/
 }
 
 footer {
