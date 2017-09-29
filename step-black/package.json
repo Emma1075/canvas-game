@@ -1,0 +1,11 @@
+{
+	"name": "step-black",
+	"version": "1.0.0",
+	"description": "'别踩白块游戏'",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "tangli",
+	"license": "ISC"
+}
