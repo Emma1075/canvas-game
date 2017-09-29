@@ -10,7 +10,7 @@ let myCanvas = document.getElementById('cv'),
 
 window.onresize = function() {
 	let w = document.documentElement.clientWidth;
-	let h = document.documentElement.clientHeight;
+	let h = document.documentElement.clientHeight - 40;
 
 	myCanvas.width = w;
 	myCanvas.height = h;
@@ -43,8 +43,8 @@ let {
 
 let data = [];
 
-let c = 4,
-	r = 4,
+let c = 5,
+	r = 5,
 	block_w = width / c,
 	block_h = height / r,
 	t = -block_h;
@@ -79,7 +79,7 @@ function initGame() {
 
 		// 重新绘制
 		draw();
-		// getCore();
+		getCore();
 	}, 16)
 }
 
@@ -152,7 +152,7 @@ continueBtn.onclick = function() {
 
 		// 重新绘制
 		draw();
-		// getCore();
+		getCore();
 	}, 16)
 
 	// 继续游戏后，isStarted 为 true
@@ -205,10 +205,10 @@ function draw() {
 	}
 }
 
-// function getCore() {
-// 	let num = Math.floor((speed - 1) * 5 * speed * speed);
-// 	core.innerHTML = `得分: ${num} `
-// }
+function getCore() {
+	let num = Math.floor((speed - 1) * 5 * speed * speed);
+	maskOver.innerHTML = `游戏结束！得分: ${num} `
+}
 
 function stopGame() {
 	maskOver.style.display = 'block';
