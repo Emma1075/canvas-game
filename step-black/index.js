@@ -2,11 +2,29 @@ let core = document.getElementById('core'),
 	reStartBtn = document.getElementById('reStart'),
 	stopBtn = document.getElementById('stop'),
 	continueBtn = document.getElementById('continue'),
-	maskOver = document.querySelector('.mask.over');
-maskStopped = document.querySelector('.mask.stopped');
+	maskOver = document.querySelector('.mask.over'),
+	maskStopped = document.querySelector('.mask.stopped');
 
 let myCanvas = document.getElementById('cv'),
 	oContext = myCanvas.getContext('2d');
+
+window.onresize = function() {
+	let w = document.documentElement.clientWidth;
+	let h = document.documentElement.clientHeight;
+
+	myCanvas.width = w;
+	myCanvas.height = h;
+	setWH(myCanvas, w, h);
+
+	// oContext.style.marginLeft = -w / 2 + 'px';
+
+	setWH(maskStopped, w, h);
+	setWH(maskOver, w, h);
+
+}
+
+window.onresize();
+
 let {
 	width,
 	height
@@ -61,15 +79,17 @@ function initGame() {
 
 		// 重新绘制
 		draw();
-		getCore();
+		// getCore();
 	}, 16)
 }
 
 // 给 canvas 添加点击事件
-myCanvas.addEventListener('click', function(ev) {
-	let x = ev.offsetX;
-	let y = ev.offsetY - t;
+myCanvas.addEventListener('touchstart', function(ev) {
+	let x = ev.targetTouches[0].clientX;
+	let y = ev.targetTouches[0].clientY - t;
 
+	console.log(x, ev.targetTouches[0].clientY)
+	console.log(x, y)
 	let r = Math.floor(y / block_h);
 	let c = Math.floor(x / block_w);
 
@@ -132,7 +152,7 @@ continueBtn.onclick = function() {
 
 		// 重新绘制
 		draw();
-		getCore();
+		// getCore();
 	}, 16)
 
 	// 继续游戏后，isStarted 为 true
@@ -185,10 +205,10 @@ function draw() {
 	}
 }
 
-function getCore() {
-	let num = Math.floor((speed - 1) * 5 * speed * speed);
-	core.innerHTML = `得分: ${num} `
-}
+// function getCore() {
+// 	let num = Math.floor((speed - 1) * 5 * speed * speed);
+// 	core.innerHTML = `得分: ${num} `
+// }
 
 function stopGame() {
 	maskOver.style.display = 'block';
@@ -211,4 +231,9 @@ function startGame() {
 	speed = 1;
 	maskOver.style.display = 'none';
 	initGame();
+}
+
+function setWH(ele, w, h) {
+	ele.style.width = w + 'px';
+	ele.style.height = h + 'px';
 }
