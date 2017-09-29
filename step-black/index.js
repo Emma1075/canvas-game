@@ -207,7 +207,7 @@ function getCore() {
 
 function stopGame() {
 	maskOver.style.display = 'block';
-	let num = getCore();
+	let num = getCore() > 0 ? getCore() : 0;
 	maskOver.innerHTML = `游戏结束! 得分: ${num}`
 	clearTimeout(timer);
 
