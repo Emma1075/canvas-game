@@ -58,28 +58,32 @@ let isContinue = false,
 initGame()
 
 function initGame() {
-	getData();
-	draw();
-	isStarted = true;
-	timer = setInterval(function() {
-		t += speed;
-
-		if (t >= 0) {
-			let lastRow = data.pop();
-			data.unshift(createLine());
-
-			// 重置 t 值
-			t = -block_h;
-
-			// 最下方消失的一行中，有未被点的黑块,则退出游戏
-			if (lastRow.includes(1)) {
-				stopGame();
-			}
-		}
-
-		// 重新绘制
+	// 1 秒后再启动游戏
+	setTimeout(() => {
+		getData();
 		draw();
-	}, 16)
+		isStarted = true;
+		timer = setInterval(function() {
+			t += speed;
+
+			if (t >= 0) {
+				let lastRow = data.pop();
+				data.unshift(createLine());
+
+				// 重置 t 值
+				t = -block_h;
+
+				// 最下方消失的一行中，有未被点的黑块,则退出游戏
+				if (lastRow.includes(1)) {
+					stopGame();
+				}
+			}
+
+			// 重新绘制
+			draw();
+		}, 16)
+
+	}, 1000)
 }
 
 // 给 canvas 添加点击事件
