@@ -43,8 +43,8 @@ let {
 
 let data = [];
 
-let c = 5,
-	r = 5,
+let c = 4,
+	r = 4,
 	block_w = width / c,
 	block_h = height / r,
 	t = -block_h;
